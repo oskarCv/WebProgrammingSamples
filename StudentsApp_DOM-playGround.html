@@ -1,0 +1,117 @@
+<html>
+<head>
+	<title>StudentsApp</title>
+</head>
+<body>
+<body onload='displayInfo()'>
+  <div class='Wrapper'>
+    <div class='Input'>
+      <label>Cantidad de alumnos:</label>
+        <input 
+           type="number" 
+           id='amount' 
+           value="0" 
+           min="0"
+    />
+    <button 
+            onClick='getAmount()' id='create'>Create</button> <button onClick='row()' >+</button><br />
+  </div>
+  
+  <div class = 'StudentsAvgData' onLoad= 'displayInfo()'> 
+    <label class = 'StudentsAvgData' id='studentsInfo' value='Student'></label>
+  </div>
+  
+  <div class ='Content'></div>
+</div>
+  
+</body>
+<script type='text/javascript'>const element = document.querySelector('.Content');
+
+
+let rowId=0;
+var noStudents = 0;
+var totalGrades = 0;
+
+function displayInfo(){
+  document.querySelector('#studentsInfo').innerText = "Total Students: "+ noStudents + " AVG Grades: " +totalGrades/noStudents;
+}
+function addingNote(){
+  let grade = document.querySelector('.'+this.className+'[name = "grade"]').value;
+  grade = parseInt(grade);
+  if((grade + 1)%5 ==  0 && grade > 38){
+    grade= grade+1;
+  }else if((grade+2)%5 ==  0 && grade > 38){
+    grade= grade+2;
+  }
+  totalGrades = totalGrades+grade;
+  console.log(grade + '->' + totalGrades);
+  
+  let finalGrade = document.querySelector('.'+this.className+'[name = "finalGrade"]');
+  finalGrade.value=grade;
+  displayInfo();
+}
+
+function remove(){
+  noStudents--;
+  totalGrades = totalGrades-document.querySelector('.'+this.className+'[name = "finalGrade"]').value;
+  displayInfo();
+  while (this.className) {
+    element.removeChild(document.querySelector('.'+this.className));
+  }
+  
+}
+
+function row(){
+  let nameNode   = document.createElement('input');
+  let gradeNode  = document.createElement('input');
+  let finalNote  = document.createElement('input');
+  let textNode   = document.createTextNode(' - ');
+  let removeNode = document.createElement('button');
+  let br = document.createElement('br');
+  
+  br.className='row'+rowId;
+  
+  nameNode.className='row'+rowId;
+  nameNode.setAttribute("type","text");
+  
+  gradeNode.className='row'+rowId;
+  gradeNode.placeholder= 'grade';
+  gradeNode.setAttribute("name","grade");
+  gradeNode.setAttribute("type","number");
+  gradeNode.addEventListener("blur",addingNote);
+  
+  finalNote.className='row'+rowId;
+  finalNote.setAttribute("name","finalGrade");
+  finalNote.setAttribute("type","number");
+  finalNote.disabled='true';
+  
+  
+  removeNode.className='row'+rowId;
+  removeNode.appendChild(textNode);
+  removeNode.addEventListener("click", remove);
+  
+  element.appendChild(nameNode);
+  element.appendChild(gradeNode);
+  element.appendChild(finalNote);
+  element.appendChild(removeNode);
+  element.appendChild(br);
+  rowId++;
+  noStudents++;
+  displayInfo();
+}
+
+function getAmount(){
+  const amount = document.querySelector('#amount').value;  
+  let elements = 0;
+  while(elements < amount){
+    row();
+    elements++;
+  }
+  let amountInput = document.getElementById("amount");
+  let btnCreate = document.getElementById("create");
+  amountInput.disabled = 'true';
+  btnCreate.disabled = 'true';
+}
+</script>
+</body>
+</html>
