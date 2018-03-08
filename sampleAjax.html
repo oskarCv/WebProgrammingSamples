@@ -1,0 +1,28 @@
+<HTML>
+
+<body>
+
+<h3>This sample will consume call a Wordpress REST API by making an Ajax call in an old fashion way  </3>
+<script>
+  /*we first create the ajax object*/
+var xhr = new XMLHttpRequest();
+/**
+ *  open makes the call based on the method params
+ *  1 -> http method we want to use
+ *  2 -> URI to hit 
+ *  3 -> true to make the async or false to make it sync
+ */
+xhr.open(
+  "GET",
+  "https://demo.wp-api.org/wp-json/wp/v2/posts",
+  true
+);
+
+xhr.onload = function(){
+  console.log(xhr.responseText);
+};
+xhr.send();
+</script>
+
+</body>
+</HTML>

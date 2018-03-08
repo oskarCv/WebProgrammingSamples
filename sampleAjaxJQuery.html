@@ -1,0 +1,23 @@
+<html>
+<head>
+
+</head>
+<body>
+<h3>This sample will consume call a Wordpress REST API by making an Ajax call using JQuery CDN  </3>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script>
+ $.ajax({
+  url:"http://demo.wp-api.org/wp-json/wp/v2/posts",
+  type :"GET",
+  success:function(response){
+    console.log(response);
+  }
+});
+</script>
+
+</body>
+</html>
