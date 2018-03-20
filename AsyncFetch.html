@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>Space People</title>
+	</head>
+	<body>
+		<script>
+			/*fetch sample*/	
+			const getPeople = () => fetch('http://api.open-notify.org/astros.json')
+				.then(resolve => resolve.json());
+			getPeople().then(console.log);
+
+		</script>
+	</body>
+</html>

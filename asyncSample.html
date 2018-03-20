@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>Async</title>
+	</head>
+	<body>
+		<script>
+			/*Using Async is the only way we can use await*/	
+
+			const delay = (secs) =>{
+				return new Promise(
+					(resolve) => setTimeout(resolve,secs*1000)
+				)
+			};
+			const counting = async() =>{
+				console.log("0");
+				await delay(1);
+				console.log("1");
+				await delay(1);
+				console.log("2");
+				await delay(3);
+				console.log("5");
+			};
+			counting();
+
+		</script>
+	</body>
+</html>
